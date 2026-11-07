@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Audio Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="cv"></canvas>
+
+    <div id="ui">
+      <div class="top">
+        <div class="seg">
+          <button id="bCust">カスタマイズ</button>
+          <button class="icon" id="bList" title="プレイリスト" aria-label="プレイリスト">☰</button>
+          <button class="icon" id="bFull" title="フルスクリーン" aria-label="フルスクリーン">⛶</button>
+        </div>
+      </div>
+
+      <div class="bottom">
+        <div class="panel player">
+          <div class="meta"><span id="title">曲が読み込まれていません</span><span id="time">0:00 / 0:00</span></div>
+          <input type="range" id="seek" min="0" max="1000" value="0" aria-label="シークバー">
+          <div class="ctrl">
+            <button class="icon" id="bPrev" aria-label="前の曲">⏮</button>
+            <button class="icon big" id="bPlay" aria-label="再生">▶</button>
+            <button class="icon" id="bStop" aria-label="停止">■</button>
+            <button class="icon" id="bNext" aria-label="次の曲">⏭</button>
+            <button id="bRep" title="リピート切替">リピート OFF</button>
+            <span class="sp"></span>
+            <button id="bAdd">曲を追加</button>
+            <label class="vol">音量<input type="range" id="vol" min="0" max="100" value="80"></label>
+          </div>
+        </div>
+        <div class="panel params">
+          <label><span>感度 <b id="vSens">1.0</b></span><input type="range" id="sens" min="10" max="190" value="100"></label>
+          <label><span>パーティクル数 <b id="vPart">150</b></span><input type="range" id="part" min="30" max="270" value="150"></label>
+          <label><span>光のぼかし <b id="vBlur">0</b></span><input type="range" id="blur" min="0" max="20" value="0"></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="list">
+        <div class="gl">プレイリスト</div>
+        <ul id="ul"></ul>
+        <div id="benchBox" hidden>
+            <div class="gl">待機リスト（再生されません）</div>
+            <ul id="ub"></ul>
+        </div>
+    </div>
+    <div class="panel" id="cust">
+      <div class="grp"><div class="gl">配色（下の3色は自由に変更できます）</div><div id="pals" class="pals"></div>
+        <div class="cols"><input type="color" id="c1" aria-label="色1"><input type="color" id="c2" aria-label="色2"><input type="color" id="c3" aria-label="色3"></div></div>
+      <div class="grp"><div class="gl">形状</div><div class="chips" id="shapes"></div></div>
+      <div class="grp"><div class="gl">背景・演出</div><div class="chips" id="tog"></div></div>
+      <label class="rg"><span>バーの太さ <b id="vBw">50</b></span><input type="range" id="bw" min="10" max="90" value="50"></label>
+      <label class="rg"><span>回転速度（円形） <b id="vRot">1.0</b></span><input type="range" id="rot" min="0" max="20" value="10"></label>
+    </div>
+    <input type="file" id="file" accept=".mp3,.wav,.m4a,.aac,.flac,.ogg,audio/*" multiple hidden>
+    <div id="toast" role="status"></div>
+    <div id="drop">ここに音声ファイルをドロップ</div>
+
+    <div id="start">
+      <div>
+        <h1>NOCTURNE</h1>
+        <p>部屋を暗くして、音と光に身をまかせる。<br>音楽ファイルをドロップするか、「曲を追加」から読み込めます。</p>
+        <button id="goBtn">Click to Start</button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
